@@ -29,3 +29,17 @@ validation_generator = test_datagen.flow_from_directory(
     batch_size=batch_size,
     class_mode='binary'  # for gender classification
 )
+
+from keras.applications import EfficientNetB7
+from keras import layers, models
+image_size = (224, 224)
+
+base_model = EfficientNetB7(input_shape=image_size + (3,), include_top=False, weights='imagenet')
+
+model = models.Sequential()
+model.add(base_model)
+model.add(layers.GlobalAveragePooling2D())
+model.add(layers.Dense(1, activation='sigmoid'))  # Binary classification
+
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+print(model.summary())
