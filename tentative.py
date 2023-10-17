@@ -17,14 +17,14 @@ train_datagen = ImageDataGenerator(
 test_datagen = ImageDataGenerator(rescale=1./255)
 
 train_generator = train_datagen.flow_from_directory(
-    'train_data',
+    '/Fashion_recommender/train_data',
     target_size=image_size,
     batch_size=batch_size,
     class_mode='binary'  # for gender classification
 )
 
 validation_generator = test_datagen.flow_from_directory(
-    'validation',
+    '/Fashion_recommender/validation',
     target_size=image_size,
     batch_size=batch_size,
     class_mode='binary'  # for gender classification
