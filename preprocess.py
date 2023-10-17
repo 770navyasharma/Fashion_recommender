@@ -1,4 +1,5 @@
 from keras.preprocessing.image import ImageDataGenerator
+from keras.callbacks import ModelCheckpoint
 
 image_size = (224, 224)  # Adjust the size as needed
 batch_size = 32
@@ -43,3 +44,13 @@ model.add(layers.Dense(1, activation='sigmoid'))  # Binary classification
 
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 print(model.summary())
+
+checkpoint = ModelCheckpoint("model_weights.h5", monitor="val_loss", save_best_only=True)
+
+#training the model finally
+history = model.fit(
+    train_generator,
+    epochs=10,  # Adjust the number of epochs
+    validation_data=validation_generator,
+    callbacks=[checkpoint]
+)
