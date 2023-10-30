@@ -50,7 +50,7 @@ checkpoint = ModelCheckpoint("model_weights.h5", monitor="val_loss", save_best_o
 #training the model finally
 history = model.fit(
     train_generator,
-    epochs=10,  # Adjust the number of epochs
+    epochs=1,  # Adjust the number of epochs
     validation_data=validation_generator,
     callbacks=[checkpoint]
 )
